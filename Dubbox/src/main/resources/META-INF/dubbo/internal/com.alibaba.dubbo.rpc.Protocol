@@ -1,0 +1,3 @@
+dubbo=com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol
+rest=com.alibaba.dubbo.rpc.protocol.rest.RestProtocol
+memcached=com.alibaba.dubbo.rpc.protocol.memcached.MemcachedProtocol
