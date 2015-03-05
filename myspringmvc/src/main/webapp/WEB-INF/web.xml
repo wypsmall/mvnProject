@@ -15,7 +15,12 @@
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
-
+<!-- 
+	<servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.js</url-pattern>  
+    </servlet-mapping> 
+    --> 
 	<!-- 字符集 过滤器  -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
