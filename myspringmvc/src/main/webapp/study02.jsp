@@ -1,7 +1,9 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta charset="UTF-8">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Basic Layout - jQuery EasyUI Demo</title>
 <link rel="stylesheet" type="text/css"
 	href="./easyui/themes/default/easyui.css">
@@ -12,58 +14,62 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#tt").tree({  
-		url:"tree_data1.json",
-		onClick:function(node)  
-	    {  
-	    	//alert(node.text);
-	    	addTab(node.text, 'http://www.baidu.com');
-	    }  
-	});
-	
-	
-});
+    $("#user-datagrid").datagrid({ 
+        url : 'datagrid_data1.json', 
+        title : '用户列表', 
+        pagination : true, 
+        pageSize : 10, 
+        pageList : [ 10, 20, 30, 40 ], 
+        method:'get',
+        fit : true,//自适应窗口大小变化 
+        fitColumns : true, 
+        border : false, 
+        idField : 'id', 
+        columns : [ [ { 
+            title : '用户编号', 
+            field : 'id', 
+            width : 100 
+        //宽度必须，数值随便 
+        }, { 
+            title : '用户名', 
+            field : 'author', 
+            width : 100 
+        }, { 
+            title : '用户密码', 
+            field : 'name', 
+            width : 100 
+        },{ 
+            title:'注册时间', 
+            field:'link', 
+            width:100 
+        } ] ], 
+        toolbar : [ { 
+            text : '增加', 
+            iconCls : 'icon-add', 
+            handler : function() { 
+            } 
+        }, '-', { 
+            text : '删除', 
+            iconCls : 'icon-remove', 
+            handler : function() { 
+            } 
+        }, '-', { 
+            text : '编辑', 
+            iconCls : 'icon-edit', 
+            handler : function() { 
+            } 
+        }] 
 
-function addTab(title, url){
-	if ($('#tbs').tabs('exists', title)){
-		$('#tbs').tabs('select', title);
-	} else {
-		alert(url);
-		var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
-		$('#tbs').tabs('add',{
-			title:title,
-			content:content,
-			closable:true
-		});
-	}
-}
-	
-function collapseAll(){
-	$('#tt').tree('collapseAll');
-}
-function expandAll(){
-	$('#tt').tree('expandAll');
-}
-function expandTo(){
-	var node = $('#tt').tree('find',113);
-	$('#tt').tree('expandTo', node.target).tree('select', node.target);
-}
-function getSelected(){
-	var node = $('#tt').tree('getSelected');
-	if (node){
-		var s = node.text;
-		if (node.attributes){
-			s += ","+node.attributes.p1+","+node.attributes.p2;
-		}
-		alert(s);
-	}
-}
+    //两个[],实现多级表头，合并单元格的效果，产生不规则表头   
 
+    }); 
+
+}); 
 </script>
 <body class="easyui-layout">
 
-	<table class="easyui-datagrid"
-		data-options="url:'datagrid_data1.json',method:'get',border:true,singleSelect:true,fit:true,fitColumns:true">
+<!-- 	<table class="easyui-datagrid"
+		data-options="url:'datagrid_data1.json',method:'get',border:true,singleSelect:true,fit:true,fitColumns:true,rownumbers:true,pagination:true,pageSize:3">
 		<thead>
 			<tr>
 				<th data-options="field:'id'" width="20">id</th>
@@ -73,7 +79,8 @@ function getSelected(){
 				<th data-options="field:'link',align:'center'" width="160">link</th>
 			</tr>
 		</thead>
-	</table>
+	</table> -->
+	<table id="user-datagrid"></table>
 
 </body>
 </html>
