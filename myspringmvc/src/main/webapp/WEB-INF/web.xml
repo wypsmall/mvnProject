@@ -1,24 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	version="2.5">
-
-	<display-name>Spring-Rest</display-name>
-
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-
-<!-- 
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	                         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+	     version="2.5" >
+	
+	<!-- 区分项目名称，防止默认重名 -->
 	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/rest-service.xml</param-value>
+		<param-name>webAppRootKey</param-name>
+		<param-value>maven.example.root</param-value>
 	</context-param>
- -->
+
+	<!-- Spring的log4j监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+
+	<servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.js</url-pattern>  
+    </servlet-mapping> 
+    <servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.css</url-pattern>  
+    </servlet-mapping> 
+    	<servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.png</url-pattern>  
+    </servlet-mapping>
+    <servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.jpg</url-pattern>  
+    </servlet-mapping>
+    <servlet-mapping>  
+        <servlet-name>default</servlet-name>  
+        <url-pattern>*.gif</url-pattern>  
+    </servlet-mapping> 
+	<!-- 字符集 过滤器  -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -36,6 +54,21 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+	<!-- Spring view分发器 -->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/dispatcher-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>rest</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -43,7 +76,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/rest-servlet.xml</param-value>
 		</init-param>
-		<load-on-startup>1</load-on-startup>
+		<load-on-startup>2</load-on-startup>
 	</servlet>
 
 	<servlet-mapping>
