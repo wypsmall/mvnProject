@@ -17,10 +17,10 @@
 	<!-- 自动搜索@Controller标注的类，包括其下面的子包 -->
 	<context:component-scan base-package="com.neo" />
 	
-	<mvc:resources mapping="/js/**" location="/static/js/"/>     
+<!-- 	<mvc:resources mapping="/js/**" location="/static/js/"/>     
     <mvc:resources mapping="/styles/**" location="/static/css/"/>     
     <mvc:resources mapping="/images/**" location="/static/images/"/>     
-    <mvc:default-servlet-handler /> 
+    <mvc:default-servlet-handler />  -->
 
 	<!-- 根据客户端的不同的请求决定不同的view进行响应, 如 /blog/1.json /blog/1.xml -->
 	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">

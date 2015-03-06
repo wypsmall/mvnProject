@@ -23,6 +23,6 @@ public class FeedController {
         tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "Confederations Cup", "www.fifa.com/confederationscup/"));
         model.addAttribute("items", tournamentList);
         model.addAttribute("status", 0);
-        return "jsontournamenttemplate";
+        return "";
     }
 }

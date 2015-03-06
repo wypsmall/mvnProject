@@ -1,6 +1,6 @@
 <html>
 <!-- <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script> -->
-<script type="text/javascript" src="./javascript/jquery-1.8.0.js"></script>
+<script type="text/javascript" src="./static/js/jquery-1.8.0.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
 	$("button").click(function(){
