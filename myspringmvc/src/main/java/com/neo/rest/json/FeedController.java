@@ -25,4 +25,16 @@ public class FeedController {
         model.addAttribute("status", 0);
         return "";
     }
+    
+    @RequestMapping("/datagrid_data1")
+    public String getGridJSON(Model model) {
+    	List<TournamentContent> tournamentList = new ArrayList<TournamentContent>();
+        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "World Cup", "www.fifa.com/worldcup/"));
+        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-20 World Cup", "www.fifa.com/u20worldcup/"));
+        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-17 World Cup", "www.fifa.com/u17worldcup/"));
+        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "Confederations Cup", "www.fifa.com/confederationscup/"));
+        model.addAttribute("rows", tournamentList);
+    	model.addAttribute("total", 4);
+    	return "";
+    }
 }
