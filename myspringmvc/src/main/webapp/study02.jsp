@@ -16,14 +16,20 @@
 $(document).ready(function(){
     $("#user-datagrid").datagrid({ 
         url : 'datagrid_data1.json', 
+        //width: 700, 
+        //height: 'auto', 
+        nowrap: false, 
+        striped: true, 
         title : '用户列表', 
-        pagination : true, 
-        pageSize : 10, 
+        pageSize : 20, 
         pageList : [ 10, 20, 30, 40 ], 
         method:'get',
         fit : true,//自适应窗口大小变化 
         fitColumns : true, 
         border : false, 
+        singleSelect:true,//是否单选 
+        pagination:true,//分页控件 
+        rownumbers:true,//行号 
         idField : 'id', 
         columns : [ [ { 
             title : '用户编号', 

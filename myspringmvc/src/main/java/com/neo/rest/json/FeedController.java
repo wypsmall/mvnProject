@@ -38,15 +38,16 @@ public class FeedController {
     @ResponseBody
     public String getGridJSON(Model model) {
     	List<TournamentContent> tournamentList = new ArrayList<TournamentContent>();
-        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "你好", "www.fifa.com/worldcup/"));
-        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-20 World Cup", "www.fifa.com/u20worldcup/"));
-        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-17 World Cup", "www.fifa.com/u17worldcup/"));
-        tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "Confederations Cup", "www.fifa.com/confederationscup/"));
-        model.addAttribute("rows", tournamentList);
-    	model.addAttribute("total", 4);
+    	for (int i = 0; i < 20; i++) {
+    		tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "你好"+i, "www.fifa.com/worldcup/"));
+		}
+        //tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-20 World Cup", "www.fifa.com/u20worldcup/"));
+        //tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-17 World Cup", "www.fifa.com/u17worldcup/"));
+        //tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "Confederations Cup", "www.fifa.com/confederationscup/"));
     	JSONObject json = new JSONObject();
     	json.put("rows", tournamentList);
-    	json.put("total", tournamentList.size());
+    	json.put("total", 50);
+    	json.put("page", 1);
     	return json.toString();
     }
     
