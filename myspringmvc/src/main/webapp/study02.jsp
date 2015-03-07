@@ -53,17 +53,28 @@ $(document).ready(function(){
             text : '增加', 
             iconCls : 'icon-add', 
             handler : function() { 
-            	$('#popwin').window('open')
+            	$('#popwin').window('open');
             } 
         }, '-', { 
             text : '删除', 
             iconCls : 'icon-remove', 
             handler : function() { 
+            	var row = $('#user-datagrid').datagrid('getSelected');
+            	if (row) {
+            	     var rowIndex = $('#user-datagrid').datagrid('getRowIndex', row);
+            	     $('#user-datagrid').datagrid('deleteRow', rowIndex);
+            	     $('#user-datagrid').datagrid('clearSelections');
+            	 }
             } 
         }, '-', { 
             text : '编辑', 
             iconCls : 'icon-edit', 
             handler : function() { 
+            	$('#popwin').window('open');
+            	var row = $('#user-datagrid').datagrid('getSelected');
+            	$('#ff').form('load',{
+            		name:row.name
+            	});
             } 
         }] 
 
