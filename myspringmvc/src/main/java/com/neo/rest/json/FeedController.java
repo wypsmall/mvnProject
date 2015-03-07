@@ -38,7 +38,7 @@ public class FeedController {
     @ResponseBody
     public String getGridJSON(Model model) {
     	List<TournamentContent> tournamentList = new ArrayList<TournamentContent>();
-    	for (int i = 0; i < 20; i++) {
+    	for (int i = 0; i < 10; i++) {
     		tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "你好"+i, "www.fifa.com/worldcup/"));
 		}
         //tournamentList.add(TournamentContent.generateContent("FIFA", new Date(), "U-20 World Cup", "www.fifa.com/u20worldcup/"));

@@ -21,7 +21,7 @@ $(document).ready(function(){
         nowrap: false, 
         striped: true, 
         title : '用户列表', 
-        pageSize : 20, 
+        pageSize : 10, 
         pageList : [ 10, 20, 30, 40 ], 
         method:'get',
         fit : true,//自适应窗口大小变化 
@@ -73,7 +73,9 @@ $(document).ready(function(){
             	$('#popwin').window('open');
             	var row = $('#user-datagrid').datagrid('getSelected');
             	$('#ff').form('load',{
-            		name:row.name
+            		name:row.name,
+            		email:row.email+'@163.com',
+            		subject:row.link,
             	});
             } 
         }] 
@@ -110,19 +112,19 @@ function clearForm(){
 		<table cellpadding="5">
 	    		<tr>
 	    			<td>Name:</td>
-	    			<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+	    			<td><input class="easyui-textbox" type="text" style="width:220px" name="name" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Email:</td>
-	    			<td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><input class="easyui-textbox" type="text" style="width:220px" name="email" data-options="required:true,validType:'email'"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Subject:</td>
-	    			<td><input class="easyui-textbox" type="text" name="subject" data-options="required:true"></input></td>
+	    			<td><input class="easyui-textbox" type="text" style="width:220px" name="subject" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Message:</td>
-	    			<td><input class="easyui-textbox" name="message" data-options="multiline:true" style="height:60px"></input></td>
+	    			<td><input class="easyui-textbox" name="message" style="width:220px;height:60px" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Language:</td>
