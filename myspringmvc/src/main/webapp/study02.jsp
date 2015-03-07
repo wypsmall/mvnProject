@@ -86,7 +86,19 @@ $(document).ready(function(){
 
 }); 
 function submitForm(){
-	$('#ff').form('submit');
+	$('#ff').form({
+	    url:'sub.do',
+	    onSubmit: function(){
+			// do some check
+			// return false to prevent submit;
+	    },
+	    success:function(data){
+			alert(data);
+			$('#popwin').window('close');
+	    }
+	});
+	// submit the form
+	$('#ff').submit();
 }
 function clearForm(){
 	$('#ff').form('clear');
