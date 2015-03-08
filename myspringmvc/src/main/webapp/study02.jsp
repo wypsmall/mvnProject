@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv=”content-type” content=”text/html; charset=UTF-8″ />
 <title>Basic Layout - jQuery EasyUI Demo</title>
 <link rel="stylesheet" type="text/css"
 	href="./easyui/themes/default/easyui.css">
@@ -86,6 +86,9 @@ $(document).ready(function(){
 
 }); 
 function submitForm(){
+	$.ajaxSetup({
+		  contentType: "application/x-www-form-urlencoded; charset=utf-8"
+		});
 	$('#ff').form({
 	    url:'sub.do',
 	    onSubmit: function(){
