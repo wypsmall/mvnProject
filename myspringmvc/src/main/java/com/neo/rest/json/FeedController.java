@@ -2,7 +2,6 @@
 package com.neo.rest.json;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,7 @@ import com.neo.rest.feeds.TournamentContent;
 
 
 @Controller
+@Scope("prototype")
 public class FeedController {
     @RequestMapping("/jsonfeed")
     public String getJSON(Model model) {
