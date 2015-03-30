@@ -6,7 +6,7 @@ import com.alibaba.rocketmq.client.producer.DefaultMQProducer;
 import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.common.message.Message;
 
-public class MQProducer {
+public class NeoMQProducer {
 
 	public static void main(String[] args) throws MQClientException, InterruptedException {
 		/**
@@ -15,10 +15,11 @@ public class MQProducer {
 		 * ProducerGroup这个概念发送普通的消息时，作用不大，但是发送分布式事务消息时，比较关键，
 		 * 因为服务器会回查这个Group下的任意一个Producer
 		 */
-		DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName-gomeo2o");
-		producer.setInstanceName("Producer-gomeo2o");
-		producer.setNamesrvAddr("10.144.5.118:9876;10.144.5.119:9876");   //172.19.253.121:9876
-
+		DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName-neo");
+		producer.setInstanceName("Producer-neo");
+		producer.setNamesrvAddr("172.19.253.121:9876;172.19.253.122:9876");   //172.19.253.121:9876
+		//172.19.253.121:10911 172.19.253.121:10912
+		//172.19.253.122:10911 172.19.253.122:10912
 		/**
 		 * Producer对象在使用之前必须要调用start初始化，初始化一次即可<br>
 		 * 注意：切记不可以在每次发送消息时，都调用start方法
@@ -31,10 +32,10 @@ public class MQProducer {
 		 * 例如消息写入Master成功，但是Slave不成功，这种情况消息属于成功，但是对于个别应用如果对消息可靠性要求极高，<br>
 		 * 需要对这种情况做处理。另外，消息可能会存在发送失败的情况，失败重试由应用来处理。
 		 */
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 1; i++) {
 			try {
 				{
-					Message msg = new Message("broker-a",// topic
+					Message msg = new Message("broker-test",// topic
 							"TagA",// tag
 							"OrderID001",// key
 							("Hello MetaQ").getBytes());// body
@@ -42,23 +43,6 @@ public class MQProducer {
 					System.out.println(sendResult);
 				}
 
-/*				{
-					Message msg = new Message("TopicTest2",// topic
-							"TagB",// tag
-							"OrderID0034",// key
-							("Hello MetaQ").getBytes());// body
-					SendResult sendResult = producer.send(msg);
-					System.out.println(sendResult);
-				}
-
-				{
-					Message msg = new Message("TopicTest3",// topic
-							"TagC",// tag
-							"OrderID061",// key
-							("Hello MetaQ").getBytes());// body
-					SendResult sendResult = producer.send(msg);
-					System.out.println(sendResult);
-				}*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
