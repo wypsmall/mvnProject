@@ -11,7 +11,7 @@ public class ZkTestLock {
                 try {
                     lock = new DistributedReentrantLock(ZK_HOST,"test1");
                     lock.lock();
-                    Thread.sleep(3000);
+//                    Thread.sleep(3000);
                     System.out.println("===Thread " + Thread.currentThread().getId() + " running");
                 } catch (Exception e) {
                     e.printStackTrace();
