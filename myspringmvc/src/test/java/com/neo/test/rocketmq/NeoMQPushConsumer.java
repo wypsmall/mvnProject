@@ -9,7 +9,7 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.message.MessageExt;
 
-public class MQPushConsumer {
+public class NeoMQPushConsumer {
 
 	public static void main(String[] args) {
 		try {
@@ -17,14 +17,14 @@ public class MQPushConsumer {
 			 * 一个应用创建一个Consumer，由应用来维护此对象，可以设置为全局对象或者单例<br>
 			 * 注意：ConsumerGroupName需要由应用来保证唯一
 			 */
-			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ConsumerGroupName");
+			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ConsumerGroupName-neo");
 			consumer.setNamesrvAddr("172.19.253.121:9876;172.19.253.122:9876");
 			consumer.setInstanceName("Producer-neo");
 
 			/**
 			 * 订阅指定topic下tags分别等于TagA或TagC或TagD
 			 */
-			consumer.subscribe("broker-test", "TagA");
+			consumer.subscribe("broker-a", "TagA");
 			/**
 			 * 订阅指定topic下所有消息<br>
 			 * 注意：一个consumer对象可以订阅多个topic
@@ -41,7 +41,7 @@ public class MQPushConsumer {
 					System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + msgs.size());
 
 					MessageExt msg = msgs.get(0);
-					if (msg.getTopic().equals("broker-test")) {
+					if (msg.getTopic().equals("broker-a")) {
 						// 执行TopicTest1的消费逻辑
 						if (msg.getTags() != null && msg.getTags().equals("TagA")) {
 							// 执行TagA的消费
@@ -51,7 +51,7 @@ public class MQPushConsumer {
 						} else if (msg.getTags() != null && msg.getTags().equals("TagD")) {
 							// 执行TagD的消费
 						}
-					} else if (msg.getTopic().equals("broker-test")) {
+					} else if (msg.getTopic().equals("broker-a")) {
 						System.out.println(new String(msg.getBody()));
 					}
 
