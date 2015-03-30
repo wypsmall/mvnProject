@@ -17,11 +17,18 @@ public class TestWriteLock {
 			WriteLock leader = new WriteLock(keeper, dir, null);
 			Boolean res = leader.lock();
 			System.out.println("res : " + res);
-			res = leader.lock();
-			System.out.println("res-1 : " + res);
-			res = leader.lock();
-			System.out.println("res-2 : " + res);
-			leader.unlock();
+			for (int i = 0; i < 100; i++) {
+				while(!leader.lock()) {
+					System.out.println("res : " + res);
+				}
+				System.out.println("do something");
+				leader.unlock();
+			}
+//			res = leader.lock();
+//			System.out.println("res-1 : " + res);
+//			res = leader.lock();
+//			System.out.println("res-2 : " + res);
+//			leader.unlock();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 
