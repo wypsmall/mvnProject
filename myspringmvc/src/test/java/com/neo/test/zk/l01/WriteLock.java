@@ -207,7 +207,7 @@ public class WriteLock extends ProtocolSupport {
                     long sessionId = zookeeper.getSessionId();
                     String prefix = "x-" + sessionId + "-";
                     LOG.info("============>id:" + id);
-                	//prefix = "x-";
+                	prefix = "x-";
                     // lets try look up the current ID if we failed 
                     // in the middle of creating the znode
                     findPrefixInChildren(prefix, zookeeper, dir);

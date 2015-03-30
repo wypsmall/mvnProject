@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
  
+
+
+import net.sf.json.JSONObject;
+
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
@@ -54,6 +58,15 @@ public class DistributedLock implements Lock, Watcher{
      * zookeeper节点的监视器
      */
     public void process(WatchedEvent event) {
+    	System.out.println("==>"+JSONObject.fromObject(event).toString());
+    	String path = event.getPath();
+    	if(null == waitNode)
+    		return;
+    	if(null == path)
+    		return;
+    	if(!waitNode.equals(path)) {
+    		return;
+    	}
         if(this.latch != null) {  
             this.latch.countDown();  
         }
@@ -127,11 +140,13 @@ public class DistributedLock implements Lock, Watcher{
  
     private boolean waitForLock(String lower, long waitTime) throws InterruptedException, KeeperException {
         Stat stat = zk.exists(root + "/" + lower,true);
+        
         //判断比自己小一个数的节点是否存在,如果不存在则无需等待锁,同时注册监听
         if(stat != null){
             System.out.println("Thread " + Thread.currentThread().getId() + " waiting for " + root + "/" + lower);
             this.latch = new CountDownLatch(1);
-            this.latch.await(waitTime, TimeUnit.MILLISECONDS);
+            //this.latch.await(waitTime, TimeUnit.MILLISECONDS);
+            this.latch.await();
             this.latch = null;
         }
         return true;

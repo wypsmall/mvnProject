@@ -24,7 +24,7 @@ public class TestWriteLock {
 			leader.unlock();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 	
