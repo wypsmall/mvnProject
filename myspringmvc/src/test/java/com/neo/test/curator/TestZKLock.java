@@ -16,25 +16,68 @@ public class TestZKLock {
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
 		final CuratorFramework zkclient = CuratorFrameworkFactory.newClient(ZK_HOST, retryPolicy);
 		zkclient.start();
-		operate(zkclient);
+		//testMutex(zkclient);
+		testSemaphoreMutex(zkclient);
 		CloseableUtils.closeQuietly(zkclient);
 	}
 	
-	private static void operate(CuratorFramework client) {
-		InterProcessSemaphoreMutex lock = null;
+	/**
+	* 可重入锁
+	*/
+	private static void testMutex(CuratorFramework client) {
+		InterProcessMutex lock = null;
 		try {
-			lock = new InterProcessSemaphoreMutex(client, "/test_curator");
-			while (!lock.acquire(10, TimeUnit.SECONDS)) {
-				System.out.println("not get lock");
-			}
-			lock.acquire(10, TimeUnit.SECONDS);
-			System.out.println("do something");
+			lock = new InterProcessMutex(client, "/test_curator");
+			boolean res = false;
+			res = lock.acquire(10, TimeUnit.SECONDS);
+			System.out.println("InterProcessMutex not get lock-1" + res);
+			
+			//不阻塞
+			res = lock.acquire(10, TimeUnit.SECONDS); 
+			System.out.println("InterProcessMutex not get lock-2" + res);
+			
+			System.out.println("InterProcessMutex do something");
 			lock.release();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			try {
+				//但是要做两次release操作
+				lock.release();
+				//client.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			System.out.println("release lock");
+		}
+	}
+	
+	/**
+	* 不可重入锁
+	*/
+	private static void testSemaphoreMutex(CuratorFramework client) {
+		InterProcessSemaphoreMutex lock = null;
+		try {
+			lock = new InterProcessSemaphoreMutex(client, "/test_curator");
+			boolean res = false;
+			res = lock.acquire(10, TimeUnit.SECONDS);
+			System.out.println("InterProcessSemaphoreMutex not get lock-1" + res);
+			
+			//阻塞，并且返回false
+			res = lock.acquire(10, TimeUnit.SECONDS); 
+			System.out.println("InterProcessSemaphoreMutex not get lock-2" + res);
+			
+			System.out.println("InterProcessSemaphoreMutex do something");
+			//只需一次释放锁
+			lock.release();
+			System.in.read();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				//第二次释放会抛异常
 				lock.release();
 				//client.close();
 			} catch (Exception e) {
