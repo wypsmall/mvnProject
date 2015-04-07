@@ -3,7 +3,7 @@ package com.neo.test.annotation;
 import java.lang.reflect.Field;
 
 public class ValidateService {
-	private static DV dv;
+	private static ValidAnnotation dv;
     
     public ValidateService() {
         super();
@@ -32,7 +32,7 @@ public class ValidateService {
         Object value;
  
         //获取对象的成员的注解信息
-        dv=field.getAnnotation(DV.class);
+        dv=field.getAnnotation(ValidAnnotation.class);
         value=field.get(object);
          
         if(dv==null)return;

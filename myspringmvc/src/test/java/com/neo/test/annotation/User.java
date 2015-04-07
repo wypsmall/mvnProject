@@ -1,12 +1,12 @@
 package com.neo.test.annotation;
 
 public class User {
-	@DV(description="用户名",minLength=6,maxLength=32,nullable=false)
+	@ValidAnnotation(description="用户名",minLength=6,maxLength=32,nullable=false)
     private String userName;
      
     private String password;
      
-    @DV(description="邮件地址",nullable=false,regexType=RegexType.EMAIL)
+    @ValidAnnotation(description="邮件地址",nullable=false,regexType=RegexType.EMAIL)
     private String email;
      
      

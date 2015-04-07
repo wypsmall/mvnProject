@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.PARAMETER})
-public @interface DV {
+public @interface ValidAnnotation {
 
 	//是否可以为空
     boolean nullable() default false;
