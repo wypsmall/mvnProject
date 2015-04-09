@@ -14,7 +14,8 @@ import org.apache.curator.utils.CloseableUtils;
 import org.apache.log4j.Logger;
 
 public class TestZkSeq {
-	public final static String ZK_HOST = "172.19.253.121:2181,172.19.253.122:2181,172.19.253.123:2181";
+	//public final static String ZK_HOST = "172.19.253.121:2181,172.19.253.122:2181,172.19.253.123:2181";
+	public final static String ZK_HOST = "10.144.5.218:2181";
 	private final static Logger logger = Logger.getLogger(TestZkSeq.class);
 	private final static Map<String, ZKSeq> seqMap = new HashMap<String, ZKSeq>();
 	private final static String seqName = "transid";
@@ -26,7 +27,7 @@ public class TestZkSeq {
 		zkclient.start();
 		final ZKSeq seq = new ZKSeq(zkclient, seqName);
 		ExecutorService service = Executors.newFixedThreadPool(100);
-		for (int i = 0; i < 50000; i++) {
+		for (int i = 0; i < 500; i++) {
 			service.submit(new Runnable() {
 
 				@Override
