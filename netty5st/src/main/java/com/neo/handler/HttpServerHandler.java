@@ -1,17 +1,20 @@
 package com.neo.handler;
 
 import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_TYPE;
+import static io.netty.handler.codec.http.HttpHeaders.Names.CONTENT_LENGTH;
 import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelPromise;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.DefaultFullHttpResponse;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.FullHttpResponse;
 import io.netty.handler.codec.http.HttpMethod;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import io.netty.handler.codec.http.QueryStringDecoder;
 import io.netty.handler.codec.http.multipart.Attribute;
 import io.netty.handler.codec.http.multipart.DefaultHttpDataFactory;
@@ -22,6 +25,7 @@ import io.netty.handler.codec.http.multipart.InterfaceHttpData;
 import io.netty.handler.codec.http.multipart.InterfaceHttpData.HttpDataType;
 import io.netty.util.CharsetUtil;
 
+import java.net.SocketAddress;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,26 +88,41 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<FullHttpReque
 		sendFailedClose(ctx);
 	}
 	
+
+	@Override
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		System.out.println(ctx.channel().remoteAddress().toString() + "->" + ctx.channel().localAddress().toString() + " - Active");
+		super.channelActive(ctx);
+	}
+
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		System.out.println(ctx.channel().remoteAddress().toString() + "->" + ctx.channel().localAddress().toString() + " - Inactive");
+		super.channelInactive(ctx);
+	}
+
 	private void sendSucceedClose(ChannelHandlerContext ctx, Map<String, String> param) {
 		System.out.println("param is " + param.toString());
-		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.copiedBuffer(param.toString(), CharsetUtil.UTF_8));
-		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
-		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-		System.out.println("sendSucceedClose");
+		sendResponse(ctx, OK, "sendSucceedClose", param.toString());
 		
 	}
 	
 	private void sendSucceedClose(ChannelHandlerContext ctx) {
-		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.copiedBuffer("Succeed: " + OK + "\r\n", CharsetUtil.UTF_8));
-		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
-		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-		System.out.println("sendSucceedClose");
+		String msg = "Succeed: " + OK + "\r\n";
+		sendResponse(ctx, OK, "sendSucceedClose", msg);
 	}
 
 	private void sendFailedClose(ChannelHandlerContext ctx) {
-		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, BAD_REQUEST, Unpooled.copiedBuffer("Failure: " + BAD_REQUEST + "\r\n", CharsetUtil.UTF_8));
+		String msg = "Failure: " + BAD_REQUEST + "\r\n";
+		sendResponse(ctx, BAD_REQUEST, "sendFailedClose", msg);
+	}
+	
+	private void sendResponse(ChannelHandlerContext ctx, HttpResponseStatus status, String tag, String msg) {
+		FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, status, Unpooled.copiedBuffer(msg, CharsetUtil.UTF_8));
 		response.headers().set(CONTENT_TYPE, "text/plain; charset=UTF-8");
+		response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
 		ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
-		System.err.println("sendFailedClose");
+		System.out.println(tag);
 	}
 }

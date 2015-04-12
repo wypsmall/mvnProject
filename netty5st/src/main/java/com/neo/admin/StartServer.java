@@ -51,12 +51,12 @@ public class StartServer {
 					 * 不加，handlder写成，HttpObject
 					 * HttpServerHandler extends SimpleChannelInboundHandler<HttpObject>
 					 */
-					ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(65536));
+					ch.pipeline().addLast("http-aggregator", new HttpObjectAggregator(1024));
 					ch.pipeline().addLast("http-encoder", new HttpResponseEncoder());
 					ch.pipeline().addLast("http-handler", new HttpServerHandler());
 				}
 			});
-			ChannelFuture future = b.bind("127.0.0.1", port).sync();
+			ChannelFuture future = b.bind("0.0.0.0", port).sync();
 			System.out.println("HTTP服务器启动，请求URL : " + "http://127.0.0.1:" + port);
 			future.channel().closeFuture().sync();
 		} finally {
