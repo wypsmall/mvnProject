@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="DAILY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/daily.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/bak/daily.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>90</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%date{MMddHH:mm:ss.SSS} [%thread] %-5level %logger{0} - %msg%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="MPSP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>logs/mpsp.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logs/bak/mpsp.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>120</maxHistory>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%date{yyMMddHH:mm:ss.SSS} %-5level %logger{0} - %msg%n</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter" >
+    	<level>INFO</level>
+    </filter>
+  </appender>
+  <logger name="MPSP" level="INFO" >
+  	<appender-ref ref="MPSP" />
+  </logger>
+ 
+  <root level="DEBUG">
+    <appender-ref ref="DAILY" />
+    <appender-ref ref="STDOUT" />
+    <logger-ref ref="MPSP" />
+  </root>
+</configuration>
