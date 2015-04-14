@@ -3,6 +3,7 @@ package com.neo.test.annotation;
 import java.lang.reflect.Field;
 
 public class ValidateService {
+	//这样定义是不对的，多线程下是线程不安全的
 	private static ValidAnnotation dv;
     
     public ValidateService() {
