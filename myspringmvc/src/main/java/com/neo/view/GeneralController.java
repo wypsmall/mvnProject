@@ -4,19 +4,26 @@ import java.io.UnsupportedEncodingException;
 
 import net.sf.json.JSONObject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.neo.service.BusiService;
+
 @Controller
 public class GeneralController {
 
+	@Autowired
+	private BusiService busiService;
+	
 	@RequestMapping(value="index.do")
 	public void index_jsp(Model model){
 		model.addAttribute("liming", "黎明你好");
 		System.out.println("index.jsp");
+		busiService.getAllData();
 	}
 	@RequestMapping(value = "/sub.do", produces = "text/plain;charset=UTF-8") 
 	@ResponseBody

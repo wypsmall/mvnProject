@@ -1,6 +1,9 @@
 package com.neo.service;
 
+import java.util.List;
 import java.util.Map;
+
+import com.neo.po.TOrder;
 
 public interface BusiService {
 	/**
@@ -11,4 +14,6 @@ public interface BusiService {
 	* @return
 	*/
 	public String getBusiCode(Map<String, String> param);
+	
+	public List<TOrder> getAllData();
 }

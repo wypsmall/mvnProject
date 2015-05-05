@@ -15,8 +15,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<!-- 自动搜索@Controller标注的类，包括其下面的子包 -->
-	<context:component-scan base-package="com.neo" />
-
+	<context:component-scan base-package="com.neo.rest" />
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters">

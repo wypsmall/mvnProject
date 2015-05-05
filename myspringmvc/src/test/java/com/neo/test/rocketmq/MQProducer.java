@@ -15,8 +15,8 @@ public class MQProducer {
 		 * ProducerGroup这个概念发送普通的消息时，作用不大，但是发送分布式事务消息时，比较关键，
 		 * 因为服务器会回查这个Group下的任意一个Producer
 		 */
-		DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName-gomeo2o");
-		producer.setInstanceName("Producer-gomeo2o");
+		DefaultMQProducer producer = new DefaultMQProducer("ProducerGroupName");
+		producer.setInstanceName("Producer");
 		producer.setNamesrvAddr("10.144.5.118:9876;10.144.5.119:9876");   //172.19.253.121:9876
 
 		/**
@@ -31,7 +31,7 @@ public class MQProducer {
 		 * 例如消息写入Master成功，但是Slave不成功，这种情况消息属于成功，但是对于个别应用如果对消息可靠性要求极高，<br>
 		 * 需要对这种情况做处理。另外，消息可能会存在发送失败的情况，失败重试由应用来处理。
 		 */
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 20; i++) {
 			try {
 				{
 					Message msg = new Message("broker-a",// topic
@@ -62,7 +62,7 @@ public class MQProducer {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			TimeUnit.MILLISECONDS.sleep(1000);
+			TimeUnit.MILLISECONDS.sleep(500);
 		}
 
 		/**

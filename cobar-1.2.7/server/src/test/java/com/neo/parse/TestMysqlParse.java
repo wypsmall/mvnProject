@@ -41,6 +41,7 @@ public class TestMysqlParse {
 				PartitionKeyVisitor visitor = new PartitionKeyVisitor(schema.getTables());
 				ast.accept(visitor);
 				//需要继续分析sql解析原理
+				//visitor.
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

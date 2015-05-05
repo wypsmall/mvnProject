@@ -11,7 +11,7 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.apache.curator.utils.CloseableUtils;
 
 public class TestZKLock {
-	public final static String ZK_HOST = "172.19.253.121:2181,172.19.253.122:2181,172.19.253.123:2181";
+	public final static String ZK_HOST = "10.144.48.195:2181";// 172.19.253.121:2181,172.19.253.122:2181,172.19.253.123:2181
 	public static void main(String[] args) {
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(1000, 3);
 		final CuratorFramework zkclient = CuratorFrameworkFactory.newClient(ZK_HOST, retryPolicy);

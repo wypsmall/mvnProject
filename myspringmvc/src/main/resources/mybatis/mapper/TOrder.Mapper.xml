@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neo.dao.impl.OrderDaoImpl">
+
+	<!-- 用户信息表 -->
+	<sql id="tablename">test_order</sql>
+
+	<resultMap id="beanMap" type="TOrder">
+		<result column="orderid" property="orderId" />
+		<result column="orderdate" property="orderDate" />
+		<result column="amount" property="amount" />
+		<result column="userid" property="userId" />
+		<result column="createdt" property="createDt" />
+	</resultMap>
+	
+	<insert id="insert" parameterType="TOrder">
+		insert into <include refid="tablename"/> (orderid, orderdate, amount, userid, createdt) 
+		values (#{orderId}, #{orderDate}, #{amount}, #{userId}, #{createDt} )
+	</insert>
+		
+	<select id="listAll" resultMap="beanMap">
+    	select * from <include refid="tablename"/>
+  	</select>
+</mapper>

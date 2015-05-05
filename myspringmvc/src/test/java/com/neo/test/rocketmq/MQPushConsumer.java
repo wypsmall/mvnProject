@@ -18,13 +18,14 @@ public class MQPushConsumer {
 			 * 注意：ConsumerGroupName需要由应用来保证唯一
 			 */
 			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("ConsumerGroupName");
-			consumer.setNamesrvAddr("172.19.253.121:9876;172.19.253.122:9876");
-			consumer.setInstanceName("Producer-neo");
+			consumer.setNamesrvAddr("10.144.5.118:9876;10.144.5.119:9876");
+			String instanceName = "Producer-52";
+			consumer.setInstanceName(instanceName);
 
 			/**
 			 * 订阅指定topic下tags分别等于TagA或TagC或TagD
 			 */
-			consumer.subscribe("broker-test", "TagA");
+			consumer.subscribe("broker-a", "TagA");
 			/**
 			 * 订阅指定topic下所有消息<br>
 			 * 注意：一个consumer对象可以订阅多个topic
@@ -64,7 +65,7 @@ public class MQPushConsumer {
 			 */
 			consumer.start();
 
-			System.out.println("Consumer Started.");
+			System.out.println("Consumer Started. " + instanceName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
