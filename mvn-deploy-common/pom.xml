@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>neo.ce</groupId>
+	<artifactId>common</artifactId>
+	<!-- 加上SNAPSHOT就会发不到 repositories/snapshots，去掉，则会发不到repositories/releases-->
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>neo-common</name>
+	<url>http://maven.apache.org</url>
+
+	<distributionManagement>
+		<repository>
+			<!-- settings.xml配置【<server> <id>gome</id> <username>admin</username> <password>admin123</password> </server>】 注意id都为gome -->
+			<id>gome</id>
+			<name>gome release repository</name>
+			<url>http://10.144.5.219:8081/nexus/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>gome</id>
+			<name>gome snapshot repository</name>
+			<url>http://10.144.5.219:8081/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
