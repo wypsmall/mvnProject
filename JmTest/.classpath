@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_core.jar"/>
+	<classpathentry kind="lib" path="lib/ApacheJMeter_java.jar"/>
+	<classpathentry kind="lib" path="lib/spring-beans-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-context-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/spring-core-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/dubbo-2.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/spring-expression-3.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="lib/javassist-3.15.0-GA.jar"/>
+	<classpathentry kind="lib" path="lib/netty-3.2.5.Final.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
