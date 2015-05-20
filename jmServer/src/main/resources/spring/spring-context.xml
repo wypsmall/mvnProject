@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+
+	<dubbo:application name="jmeter-Server" />
+
+	<!-- 注册地址 -->
+	<dubbo:registry address="multicast://224.5.6.7:1234" />
+
+	<!-- Service interface Concurrent Control -->
+	<dubbo:service interface="neo.ce.service.IVirtualService"	ref="virtualService" />
+
+	<dubbo:protocol name="dubbo" port="21001" />
+	
+	<!-- designate implementation -->
+	<bean id="virtualService" class="neo.ce.service.impl.VirtualServiceImpl" />
+
+</beans>
