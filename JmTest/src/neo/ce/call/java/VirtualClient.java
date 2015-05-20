@@ -1,4 +1,4 @@
-package neo.ce;
+package neo.ce.call.java;
 
 import neo.ce.service.IVirtualService;
 

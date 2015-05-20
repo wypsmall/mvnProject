@@ -1,12 +1,20 @@
-package neo.ce;
+package neo.ce.call.jmeter;
+
+import neo.ce.service.IVirtualService;
 
 import org.apache.jmeter.config.Arguments;
 import org.apache.jmeter.protocol.java.sampler.AbstractJavaSamplerClient;
 import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class MyJmeter extends AbstractJavaSamplerClient {
-
+public class JmeterVirtual extends AbstractJavaSamplerClient {
+	private static String label_name = "dubbo_consumer";
+	private static final ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
+			new String[] { "spring-context-dubbo.xml" }); 
+	private static IVirtualService virtualService = null;
+	
+	
 	@Override
 	public Arguments getDefaultParameters() {
 		Arguments params = new Arguments();       
@@ -14,27 +22,32 @@ public class MyJmeter extends AbstractJavaSamplerClient {
         return params;
 	}
 
+
 	@Override
 	public void setupTest(JavaSamplerContext context) {
-		super.setupTest(context);
+//		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(new String[] { "spring-context-dubbo.xml" });
+		virtualService = (IVirtualService) ctx.getBean("virtualService");
 	}
+
 
 	@Override
 	public void teardownTest(JavaSamplerContext context) {
 		super.teardownTest(context);
 	}
 
+
 	@Override
 	public SampleResult runTest(JavaSamplerContext arg0) {
 		boolean success = true;
         SampleResult sr = new SampleResult();
-        sr.setSampleLabel("MyJmeter");
+        sr.setSampleLabel(label_name);
         sr.sampleStart();//用来统计执行时间--start--
         try {
             String name = arg0.getParameter("name");
-            Thread.sleep(5000);
-            System.out.println(name);
-            sr.setResponseMessage(name);
+            String msg = virtualService.hello(name);
+            //Thread.sleep(5000);
+            System.out.println(msg);
+            sr.setResponseMessage(msg);
             sr.setResponseCode("1000");
         } catch (Exception e) {
             success = false;
