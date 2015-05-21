@@ -8,6 +8,11 @@ import org.apache.jmeter.protocol.java.sampler.JavaSamplerContext;
 import org.apache.jmeter.samplers.SampleResult;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * @Description: 过期，参见JmTest project 
+ * @author: wangyunpeng
+ * @date: 2015年5月21日上午9:22:42
+ */
 public class JmeterVirtual extends AbstractJavaSamplerClient {
 	private static String label_name = "dubbo_consumer";
 	private static final ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("classpath*:spring-context-dubbo.xml"); 

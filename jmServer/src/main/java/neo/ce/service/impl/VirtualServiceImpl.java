@@ -18,7 +18,8 @@ public class VirtualServiceImpl implements IVirtualService {
 
 	@Override
 	public String hello(String name) {
-		System.out.println(name);
+		System.out.println(this);
+		//System.out.println(name);
 		return "hello : " + name;
 	}
 

@@ -14,9 +14,12 @@ public class VirtualClient {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
 					new String[] { "spring-context-dubbo.xml" });
 			context.start();
-			IVirtualService virtualService = (IVirtualService) context.getBean("virtualService");
-
-			System.out.println(virtualService.hello("neo"));
+			for (int i = 0; i < 15; i++) {
+				
+				IVirtualService virtualService = (IVirtualService) context.getBean("virtualService");
+				
+				System.out.println(virtualService.hello("neo"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
