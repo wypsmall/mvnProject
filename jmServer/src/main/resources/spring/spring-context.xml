@@ -11,14 +11,15 @@
 	<dubbo:application name="jmeter-Server" />
 
 	<!-- 注册地址 -->
-	<dubbo:registry address="multicast://224.5.6.7:1234" />
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
+	<dubbo:registry address="zookeeper://10.144.5.218:2181" />
 
 	<!-- Service interface Concurrent Control -->
 	<dubbo:service interface="neo.ce.service.IVirtualService" ref="virtualService" />
 
-	<dubbo:protocol name="dubbo" port="21001" />
+	<dubbo:protocol name="dubbo" port="21001" threads="100" heartbeat="100000" />
 	
 	<!-- designate implementation 无论spirng配置是singleton、prototype，dubbo服务引用的只是单例-->
-	<bean id="virtualService" class="neo.ce.service.impl.VirtualServiceImpl" scope="prototype" />
+	<bean id="virtualService" class="neo.ce.service.impl.VirtualServiceImpl" />
 
 </beans>

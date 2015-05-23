@@ -52,6 +52,11 @@
 			<artifactId>zookeeper</artifactId>
 			<version>3.4.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.101tec</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

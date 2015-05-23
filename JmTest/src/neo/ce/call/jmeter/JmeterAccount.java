@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import neo.ce.call.java.AccountClient;
 
@@ -53,6 +54,7 @@ public class JmeterAccount extends AbstractJavaSamplerClient {
         SampleResult sr = new SampleResult();
         sr.setSampleLabel(label_name);
         sr.sampleStart();//用来统计执行时间--start--
+        String orderNo = "";
         try {
         	Map<String,Object> map = new HashMap<String,Object>();
 			map.put("recordValue", Integer.valueOf(arg0.getParameter("recordValue")));
@@ -60,7 +62,10 @@ public class JmeterAccount extends AbstractJavaSamplerClient {
 			//预算流水部分信息
 			map.put("userId", Integer.valueOf(arg0.getParameter("userId")));
 			//map.put("detailNo", Constants.getRebateDetailNo());
-			map.put("orderNo", arg0.getParameter("orderNo")+System.currentTimeMillis());
+			long seed = System.currentTimeMillis();
+			Random random = new Random(seed);
+			orderNo = arg0.getParameter("orderNo")+seed+"-" + random.nextInt(10);
+			map.put("orderNo", orderNo);
 			map.put("cardId", Integer.valueOf(arg0.getParameter("cardId")));
 			map.put("budgetTime", new Date());
 			map.put("budgetType", Integer.valueOf(arg0.getParameter("budgetType")));
@@ -76,7 +81,7 @@ public class JmeterAccount extends AbstractJavaSamplerClient {
             sr.setResponseMessage(res.getMessage());
             sr.setResponseCode(""+res.getCode());
         } catch (Exception e) {
-        	log.error("runTest", e);
+        	log.error("runningError-"+orderNo, e);
         	e.printStackTrace();
             success = false;
         }finally{

@@ -18,8 +18,15 @@ public class VirtualServiceImpl implements IVirtualService {
 
 	@Override
 	public String hello(String name) {
+		//用来测试方法重入了几次
+		System.out.println("enter method..." + System.currentTimeMillis());
 		System.out.println(this);
-		//System.out.println(name);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("return..." + name);
 		return "hello : " + name;
 	}
 
