@@ -62,7 +62,8 @@ public class JmeterAccount extends AbstractJavaSamplerClient {
 			//预算流水部分信息
 			map.put("userId", Integer.valueOf(arg0.getParameter("userId")));
 			//map.put("detailNo", Constants.getRebateDetailNo());
-			long seed = System.currentTimeMillis();
+			//long seed = System.currentTimeMillis();
+			long seed = System.nanoTime();
 			Random random = new Random(seed);
 			orderNo = arg0.getParameter("orderNo")+seed+"-" + random.nextInt(10);
 			map.put("orderNo", orderNo);

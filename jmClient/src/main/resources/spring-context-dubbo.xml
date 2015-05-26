@@ -15,8 +15,8 @@
 	<!-- <dubbo:registry address="multicast://224.5.6.7:1234" /> -->
 	<dubbo:registry address="zookeeper://10.144.5.218:2181" />
 	
-	<dubbo:consumer timeout="2000" retries="5" />
+	<dubbo:consumer timeout="5000" retries="5" />
 	
 	<!-- which service to consume  reference会覆盖上面consumer的retries配置-->
-	<dubbo:reference id="virtualService" interface="neo.ce.service.IVirtualService" retries="0" />
+	<dubbo:reference id="virtualService" interface="neo.ce.service.IVirtualService" retries="0" cluster="failfast" connections="200" />
 </beans> 

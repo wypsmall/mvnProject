@@ -13,12 +13,12 @@
 
 	<!-- registry address, used for consumer to discover services -->
 	<dubbo:registry address="multicast://224.5.6.7:1234" id="local" />
-	<dubbo:registry protocol="zookeeper" address="10.144.5.218:2181" id="dev" />
+	<dubbo:registry protocol="zookeeper" address="10.144.48.195:2181" id="dev" />
 	
-	<dubbo:consumer timeout="5000" connections="100" loadbalance="roundrobin" />
+	<dubbo:consumer timeout="10000" />
 	
 	<!-- which service to consume? -->
 	<dubbo:reference id="virtualService" interface="neo.ce.service.IVirtualService" registry="local" />
 	<!-- 预算总额额服务接口 -->
-	<dubbo:reference id="budgetTotalFacade" interface="com.gomeo2o.facade.account.service.BudgetTotalFacade" registry="dev" retries="0" />
+	<dubbo:reference id="budgetTotalFacade" interface="com.gomeo2o.facade.account.service.BudgetTotalFacade" registry="dev" retries="0" cluster="failfast" connections="200" loadbalance="roundrobin"  />
 </beans> 
