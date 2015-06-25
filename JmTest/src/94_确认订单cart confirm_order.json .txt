@@ -1,0 +1,6 @@
+
+tradeInfoJson:
+{"provinceId":72000000,"region":"华坪县","zip":"","phone":"","cityId":72080000,"status":1,"street":"兴泉镇","city":"丽江市","id":112233,"updatedAt":"2015-06-19 15:44:49","details":"啊实打实大","isDefault":0,"streetId":720804006,"createdAt":"2015-06-19 15:44:49","userId":12345705,"name":"啊实打实的","province":"云南省","mobile":"18612343234","regionId":72080400}
+
+dataJson:
+[{"remark":"1#true#","invoice":"{\"title\":\"*公司\",\"type\":1}","sellerId":3,"marketingParams":null,"skuIdAndInfos":[{"getOutParams":{"kId":0},"skuId":1,"quantity":1,"itemExtra":null,"referenceId":"0#1","reference":"微店ID：1   kId:{kId=0}"}],"isGome":0,"payType":1,"buyerNotes":"","needSettle":1}]

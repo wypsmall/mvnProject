@@ -13,12 +13,21 @@
 
 	<!-- registry address, used for consumer to discover services -->
 	<dubbo:registry address="multicast://224.5.6.7:1234" id="local" />
-	<dubbo:registry protocol="zookeeper" address="10.144.48.195:2181" id="dev" />
+	<dubbo:registry protocol="zookeeper" address="10.144.5.218:2181" id="dev" />
 	
 	<dubbo:consumer timeout="10000" />
 	
-	<!-- which service to consume? -->
+	<!-- which service to consume? -->findOrderById
 	<dubbo:reference id="virtualService" interface="neo.ce.service.IVirtualService" registry="local" />
 	<!-- 预算总额额服务接口 -->
-	<dubbo:reference id="budgetTotalFacade" interface="com.gomeo2o.facade.account.service.BudgetTotalFacade" registry="dev" retries="0" cluster="failfast" connections="200" loadbalance="roundrobin"  />
+	<dubbo:reference id="budgetTotalFacade" interface="com.gomeo2o.facade.account.service.BudgetTotalFacade" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin"  check="false" />
+	<!-- 
+	<dubbo:reference id="gomeUserWriteService" interface="cn.com.gome.user.service.GomeUserWriteService" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin" check="false"/>
+	 -->
+	<dubbo:reference id="itemReadService" interface="cn.com.gome.item.service.GomeItemReadService" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin" check="false" />
+
+	<!-- liutaiming test interface version   version="1.0.1"  -->
+	<dubbo:reference id="gomeOrderWriteService" interface="cn.com.gome.trade.service.GomeOrderWriteService" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin" check="false" />
+	<dubbo:reference id="gomeOrderReadService" interface="cn.com.gome.trade.service.GomeOrderReadService" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin" check="false" />
+
 </beans> 

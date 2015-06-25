@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="lib" path="lib/ApacheJMeter_core.jar"/>
 	<classpathentry kind="lib" path="lib/ApacheJMeter_java.jar"/>
 	<classpathentry kind="lib" path="lib/spring-beans-3.2.5.RELEASE.jar"/>
@@ -12,11 +11,21 @@
 	<classpathentry kind="lib" path="lib/spring-expression-3.2.5.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/javassist-3.15.0-GA.jar"/>
 	<classpathentry kind="lib" path="lib/netty-3.2.5.Final.jar"/>
-	<classpathentry kind="lib" path="lib/gome-account-api-1.0-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="lib/gome-common-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="lib/zkclient-0.4.jar"/>
 	<classpathentry kind="lib" path="lib/zookeeper-3.4.6.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.7.5.jar"/>
+	<classpathentry kind="lib" path="lib/gome-account-api-1.0-20150616.122445-144.jar"/>
+	<classpathentry kind="lib" path="lib/gome-common-1.0-20150615.100256-76.jar"/>
+	<classpathentry kind="lib" path="lib/gome-user-api-1.0-20150617.131422-221.jar"/>
+	<classpathentry kind="lib" path="lib/ecp-user-api-2.1-20150617.083409-54.jar"/>
+	<classpathentry kind="lib" path="lib/pampas-common-2.3-20150603.064625-5.jar"/>
+	<classpathentry kind="lib" path="lib/ecp-item-api-2.1-20150608.074905-30.jar"/>
+	<classpathentry kind="lib" path="lib/gome-item-api-1.0-20150604.054331-11.jar"/>
+	<classpathentry kind="lib" path="lib/terminus-common-1.2-20150513.082538-14.jar"/>
+	<classpathentry kind="lib" path="lib/gome-trade-api-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/ecp-trade-api-2.1.1-20150619.034738-4.jar"/>
+	<classpathentry kind="lib" path="lib/ecp-pay-api-2.1.1-20150619.034735-4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_75"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
