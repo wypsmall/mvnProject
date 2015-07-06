@@ -17,7 +17,7 @@
 	
 	<dubbo:consumer timeout="10000" />
 	
-	<!-- which service to consume? -->findOrderById
+	<!-- which service to consume? -->
 	<dubbo:reference id="virtualService" interface="neo.ce.service.IVirtualService" registry="local" />
 	<!-- 预算总额额服务接口 -->
 	<dubbo:reference id="budgetTotalFacade" interface="com.gomeo2o.facade.account.service.BudgetTotalFacade" registry="dev" retries="0" cluster="failfast" connections="2" loadbalance="roundrobin"  check="false" />
